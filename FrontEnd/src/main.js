@@ -1,61 +1,24 @@
-// Requête FETCH pour récupérer les données
-fetch('http://localhost:5678/api/works')
-  .then(response => response.json())
-  .then(data => {
-    const galleryDiv = document.querySelector('.gallery');
-    const parentDiv = galleryDiv.parentElement;
-    
-    const allButton = document.createElement('button');
-    allButton.innerText = "Tout";
-    allButton.addEventListener('click', () => {
-      const figures = galleryDiv.querySelectorAll('figure');
-      figures.forEach(figure => {
-        figure.style.display = 'block';
-      });
-    });
-    parentDiv.insertBefore(allButton, galleryDiv);
-    
-    // Création d'un Set pour les catégories
-    const categories = new Set();
-    data.forEach(work => categories.add(work.category.name));
+// main.js
 
-    // Ajout des boutons pour chaque catégorie
-    categories.forEach(category => {
-      const button = document.createElement('button');
-      button.innerText = category;
-      button.addEventListener('click', () => filterGallery(category));
-      parentDiv.insertBefore(button, galleryDiv);
-    });
+import { fetchWorks } from './api/fetchWorks.js';
+import { createGallery } from './components/gallery.js';
+import { createFilterButtons, createAllButton } from './components/filterButtons.js';
 
-    // Ajout des éléments de la galerie
-    data.forEach(work => {
-      const figure = document.createElement('figure');
-      figure.setAttribute('data-category', work.category.name);
-      const img = document.createElement('img');
-      const figcaption = document.createElement('figcaption');
-      
-      img.src = work.imageUrl;
-      img.alt = work.title;
-      
-      figcaption.innerText = work.title;
-      
-      figure.appendChild(img);
-      figure.appendChild(figcaption);
-      
-      galleryDiv.appendChild(figure);
-    });
-  });
-
-// Fonction pour filtrer la galerie
-const filterGallery = (category) => {
+// Fonction initiale pour tout mettre en place
+async function init() {
+  const data = await fetchWorks();
   const galleryDiv = document.querySelector('.gallery');
-  const figures = galleryDiv.querySelectorAll('figure');
-  figures.forEach(figure => {
-    const figCategory = figure.getAttribute('data-category');
-    if (figCategory !== category) {
-      figure.style.display = 'none';
-    } else {
-      figure.style.display = 'block';
-    }
-  });
-};
+  const parentDiv = galleryDiv.parentElement;
+
+  // Crée le bouton "Tout"
+  createAllButton(parentDiv, galleryDiv);
+
+  // Crée la galerie
+  createGallery(data, galleryDiv);
+
+  // Crée les boutons de filtre
+  createFilterButtons(data, parentDiv, galleryDiv);
+}
+
+// Appelle la fonction init pour initialiser l'application
+init();

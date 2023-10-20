@@ -1,0 +1,8 @@
+const URL_WORKS = 'http://localhost:5678/api/works'
+const URL_CATEGORIES = 'http://localhost:5678/api/categories'
+
+// Fonction pour récupérer les œuvres d'art à partir de l'API
+const get = async (url) => fetch(url).then((res) => res.json()).then((data) => data)
+
+export const fetchWorks = async () => get(URL_WORKS)
+export const fetchCategories = async () => get(URL_CATEGORIES)

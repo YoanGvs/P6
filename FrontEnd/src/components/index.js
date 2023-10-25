@@ -1,8 +1,10 @@
 // main.js
 import { fetchWorks } from './api'
 
+const loginA = document.getElementById('login')
+
 // Fonction pour créer le bouton "Tout"
-function createAllButton (parentDiv, galleryDiv) {
+function createAllButton(parentDiv, galleryDiv) {
   const allButton = document.createElement('button')
   allButton.className = 'button__filter'
   allButton.innerText = 'Tout'
@@ -14,7 +16,7 @@ function createAllButton (parentDiv, galleryDiv) {
 }
 
 // Fonction pour filtrer la galerie en fonction de la catégorie
-function filterGallery (category, galleryDiv) {
+function filterGallery(category, galleryDiv) {
   const figures = galleryDiv.querySelectorAll('figure')
   figures.forEach((figure) => {
     const figCategory = figure.getAttribute('data-category')
@@ -27,7 +29,7 @@ function filterGallery (category, galleryDiv) {
 }
 
 // Fonction pour créer les boutons de filtre
-function createFilterButtons (data, parentDiv, galleryDiv) {
+function createFilterButtons(data, parentDiv, galleryDiv) {
   const categories = new Set()
   data.forEach((work) => categories.add(work.category.name))
 
@@ -59,7 +61,7 @@ const createGallery = (data, galleryDiv) => {
   })
 }
 
-async function init () {
+async function init() {
   const data = await fetchWorks()
   const galleryDiv = document.querySelector('.gallery')
   const parentDiv = galleryDiv.parentElement
@@ -73,6 +75,13 @@ async function init () {
   // Crée les boutons de filtre
   createFilterButtons(data, parentDiv, galleryDiv)
 }
+
+
+if (localStorage.token) {
+  loginA.innerHTML = 'logout'
+}
+
+loginA.addEventListener('click', () => localStorage.clear())
 
 const Index = () => {
   // Fonction initiale pour tout mettre en place

@@ -56,8 +56,7 @@ table {
 /** end reset css**/
 
 body {
-	max-width: 1140px;
-	margin:auto;
+
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background: #FFFEF8;
@@ -66,7 +65,8 @@ header {
 	display: flex;
 	justify-content: space-between;
 	padding: 50px 0;
-	
+	max-width: 1440px;
+    margin: auto;
 }
 
 section {
@@ -88,7 +88,9 @@ h1 > span {
 	letter-spacing: 0.1em;
 ;
 }
-
+a{
+	text-decoration: none;
+}
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -265,4 +267,62 @@ footer nav ul {
 	line-height: normal;
 	text-decoration-line: underline;
 	padding-bottom: 75%
+}
+
+#editorBanner{
+	display: flex;
+    justify-content: center;
+    background: black;
+    gap: 1rem;
+    color: white;
+    padding: 1rem;
+	display: none;
+	text-align: center;
+	text-decoration: none;
+}
+
+#editorBanner a{
+	color: #FFF;
+}
+
+#portfolio__title{
+	display: flex;
+    justify-content: center;
+}
+
+#editorbutton{
+	padding: 0.6rem 0 0 2rem;
+    display: none;
+}
+
+.modal{
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-wrapper{
+	overflow: auto;
+	width: 600px;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 20px);
+	padding: 20px;
+	background-color: #FFF;
+
+}
+
+main{
+	max-width: 1440px;
+    margin: auto;
+}
+
+header img {
+	width: 1.375rem;
+	height: 1.375rem;
 }

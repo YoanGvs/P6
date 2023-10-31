@@ -70,7 +70,7 @@ header {
 }
 
 section {
-	margin: 50px 0
+	margin: 4rem 0
 }
 
 h1{
@@ -136,7 +136,6 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 .gallery {
 	width: 100%;
@@ -211,7 +210,7 @@ footer nav ul {
     color: #1D6154;
     text-align: center;
     font-family: Syne;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 700;
     line-height: normal;
     margin: 1rem;
@@ -290,7 +289,7 @@ footer nav ul {
     justify-content: center;
 }
 
-#editorbutton{
+#editorButton{
 	padding: 0.6rem 0 0 2rem;
     display: none;
 }
@@ -325,4 +324,20 @@ main{
 header img {
 	width: 1.375rem;
 	height: 1.375rem;
+}
+
+#filter{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.button__filter{
+	padding: 0 1rem;
+}
+
+figcaption{
+	padding: 0.5rem 0 0 0;
 }

@@ -1,17 +1,17 @@
 // main.js
 import { fetchWorks } from './api'
-const loginA = document.getElementById('login')
+import { loginA, allButton, galleryDiv, filterDiv } from './domLinker'
 
 // Fonction pour créer le bouton "Tout"
 function createAllButton (parentDiv, galleryDiv) {
-  const allButton = document.createElement('button')
   allButton.className = 'button__filter'
   allButton.innerText = 'Tout'
   allButton.addEventListener('click', () => {
     const figures = galleryDiv.querySelectorAll('figure')
     figures.forEach((figure) => { figure.style.display = 'block' })
   })
-  parentDiv.insertBefore(allButton, galleryDiv)
+  // parentDiv.insertBefore(allButton, galleryDiv)
+  filterDiv.appendChild(allButton)
 }
 
 // Fonction pour filtrer la galerie en fonction de la catégorie
@@ -31,13 +31,13 @@ function filterGallery (category, galleryDiv) {
 function createFilterButtons (data, parentDiv, galleryDiv) {
   const categories = new Set()
   data.forEach((work) => categories.add(work.category.name))
-
   categories.forEach((category) => {
     const button = document.createElement('button')
     button.className = 'button__filter'
     button.innerText = category
     button.addEventListener('click', () => filterGallery(category, galleryDiv))
-    parentDiv.insertBefore(button, galleryDiv)
+    // parentDiv.insertBefore(button, galleryDiv)
+    filterDiv.appendChild(button)
   })
 }
 
@@ -62,7 +62,6 @@ const createGallery = (data, galleryDiv) => {
 
 async function init () {
   const data = await fetchWorks()
-  const galleryDiv = document.querySelector('.gallery')
   const parentDiv = galleryDiv.parentElement
 
   // Crée le bouton "Tout"
@@ -78,15 +77,12 @@ async function init () {
 if (localStorage.token) {
   loginA.innerHTML = 'logout'
   document.getElementById('editorBanner').style.display = 'block'
-  document.getElementById('editorbutton').style.display = 'block'
+  document.getElementById('editorButton').style.display = 'block'
 }
 
 loginA.addEventListener('click', () => localStorage.clear())
 
 const Index = () => {
-  // Fonction initiale pour tout mettre en place
-
-  // Appelle la fonction init pour initialiser l'application
   init()
 }
 

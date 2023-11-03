@@ -1,4 +1,7 @@
-import { modal } from './domLinker'
+import { modal, modalWrapper } from './domLinker'
+export const cleanModal = () => {
+  modalWrapper.innerHTML = ''
+}
 
 export const openModal = () => {
   modal.style.display = 'flex'

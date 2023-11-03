@@ -9,5 +9,8 @@ export const btnOpenModal = document.getElementById('editorButton')
 export const modal = document.getElementById('modal')
 export const btnCloseModal = document.getElementById('closeModal')
 export const modalDiv = document.querySelector('.modalGallery')
+export const modalBtn = document.querySelector('#modal-btn')
+export const modalWrapper = document.querySelector('.modal-wrapper')
+export const btnCleanModal = document.querySelector('#modal-btn')
 
 // page login.html //

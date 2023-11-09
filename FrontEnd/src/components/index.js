@@ -1,6 +1,6 @@
 // Import des modules nécessaires
 import { fetchWorks } from './api'
-import { loginA, allButton, galleryDiv, filterDiv, btnOpenModal, btnCloseModal, modalDiv, btnCleanModal } from './domLinker'
+import { loginA, allButton, galleryDiv, filterDiv, btnOpenModal, btnCloseModal, btnCleanModal } from './domLinker'
 import { openModal, closeModal, cleanModal } from './modal'
 
 // Cette fonction crée un bouton "Tout" qui permet d'afficher toutes les images.
@@ -55,32 +55,46 @@ function createFilterButtons (data, parentDiv, galleryDiv) {
 }
 
 // Cette fonction crée la galerie d'images à partir des données récupérées
-const createGallery = (data, galleryDiv) => {
+export const createGallery = (data, container = galleryDiv, isModal = false) => {
+  container.innerHTML = ''
   data.forEach((work) => {
-    // Création de l'élément "figure" pour chaque image
-    const figure = document.createElement('figure')
-    figure.setAttribute('data-category', work.category.name)
-    const img = document.createElement('img')
-    const figcaption = document.createElement('figcaption')
+    if (isModal) {
+      const modalContainer = document.createElement('div')
+      modalContainer.setAttribute('class', 'modal-container')
+      const img = document.createElement('img')
+      img.src = work.imageUrl
+      img.alt = work.title
+      img.setAttribute('class', 'modal-img')
+      const a = document.createElement('a')
+      a.href = '#'
+      a.setAttribute('class', 'trash-button')
+      const i = document.createElement('i')
+      i.setAttribute('class', 'fa-solid fa-trash-can')
+      modalContainer.appendChild(img)
+      modalContainer.appendChild(a)
+      a.appendChild(i)
+      container.appendChild(modalContainer)
 
-    // Définition de l'URL de l'image et du texte alternatif
-    img.src = work.imageUrl
-    img.alt = work.title
+      a.addEventListener('click', () => {
+        console.log('click sur ', work.id)
+      })
+    } else {
+      // Création de l'élément "figure" pour chaque image
+      const figure = document.createElement('figure')
+      figure.setAttribute('data-category', work.category.name)
+      const img = document.createElement('img')
+      const figcaption = document.createElement('figcaption')
 
-    // Définition du titre de l'image
-    figcaption.innerText = work.title
+      // Définition de l'URL de l'image et du texte alternatif
+      img.src = work.imageUrl
+      img.alt = work.title
 
-    figure.appendChild(img)
-    figure.appendChild(figcaption)
-    galleryDiv.appendChild(figure)
-    modalDiv.innerHTML += `
-                          <div class="modal-container">
-                            <img src="${img.src}" class="modal-img"></img>
-                            <a href="#" class="trash-button">
-                              <i class="fa-solid fa-trash-can"></i>
-                            </a>
-                          </div>
-                          `
+      // Définition du titre de l'image
+      figcaption.innerText = work.title
+      figure.appendChild(img)
+      figure.appendChild(figcaption)
+      container.appendChild(figure)
+    }
   })
 }
 

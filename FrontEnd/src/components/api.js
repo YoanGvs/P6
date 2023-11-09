@@ -15,3 +15,4 @@ const post = async (url, data) => fetch(url, {
 export const fetchWorks = async () => get(URL_WORKS)
 export const fetchCategories = async () => get(URL_CATEGORIES)
 export const postLogin = async data => post(URL_LOGIN, data)
+

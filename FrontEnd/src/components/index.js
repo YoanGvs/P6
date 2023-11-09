@@ -1,6 +1,6 @@
 // Import des modules nécessaires
 import { fetchWorks } from './api'
-import { loginA, allButton, galleryDiv, filterDiv, btnOpenModal, btnCloseModal, btnCleanModal } from './domLinker'
+import { loginA, allButton, galleryDiv, filterDiv, btnOpenModal, btnCloseModal, btnCleanModal, modal } from './domLinker'
 import { openModal, closeModal, cleanModal } from './modal'
 
 // Cette fonction crée un bouton "Tout" qui permet d'afficher toutes les images.
@@ -125,6 +125,13 @@ loginA.addEventListener('click', () => localStorage.clear())
 const Index = () => {
   init()
 }
+
+modal.addEventListener('click', function (event) {
+  if (event.target === this) {
+    closeModal()
+    // console.log('Le fond de la modale est cliqué!')
+  }
+})
 
 // Gestionnaires d'événements pour les boutons d'ouverture et de fermeture de la fenêtre modale
 btnOpenModal.addEventListener('click', () => openModal())

@@ -1,5 +1,5 @@
 // Import des modules nécessaires
-import { fetchWorks } from './api'
+import { fetchWorks, deleteWork } from './api'
 import { loginA, allButton, galleryDiv, filterDiv, btnOpenModal, btnCloseModal, btnCleanModal, modal } from './domLinker'
 import { openModal, closeModal, cleanModal } from './modal'
 
@@ -75,8 +75,24 @@ export const createGallery = (data, container = galleryDiv, isModal = false) => 
       a.appendChild(i)
       container.appendChild(modalContainer)
 
-      a.addEventListener('click', () => {
-        console.log('click sur ', work.id)
+      a.addEventListener('click', async (event) => {
+        event.preventDefault()
+        // Ajouter une boîte de dialogue de confirmation avant de supprimer
+        if (confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
+          const workId = work.id
+          const token = localStorage.getItem('token')
+          try {
+            await deleteWork(workId, token)
+            const modalContainer = event.target.closest('.modal-container')
+            if (modalContainer) {
+              modalContainer.remove() // Supprime l'élément du DOM
+              closeModal() // Ferme la modal
+              // TO DO MAJ auto du DOM
+            }
+          } catch (error) {
+            console.error(error)
+          }
+        }
       })
     } else {
       // Création de l'élément "figure" pour chaque image
@@ -129,7 +145,6 @@ const Index = () => {
 modal.addEventListener('click', function (event) {
   if (event.target === this) {
     closeModal()
-    // console.log('Le fond de la modale est cliqué!')
   }
 })
 

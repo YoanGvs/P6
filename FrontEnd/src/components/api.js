@@ -15,4 +15,17 @@ const post = async (url, data) => fetch(url, {
 export const fetchWorks = async () => get(URL_WORKS)
 export const fetchCategories = async () => get(URL_CATEGORIES)
 export const postLogin = async data => post(URL_LOGIN, data)
+export async function deleteWork (workId, token) {
+  const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
 
+  if (!response.ok) {
+    throw new Error('Failed to delete the work.')
+  }
+  return response.json()
+}

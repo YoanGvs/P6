@@ -9,12 +9,18 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
-	<meta name="description" content="">
+		<script src="https://kit.fontawesome.com/cc460cd7eb.js" crossorigin="anonymous"></script>
+		<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <!---->
 
 <body>
+	<div id="editorBanner">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<a href="#">Mode Edition</a>		
+	</div>
+
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -43,10 +49,15 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
-			<div class="gallery">
-
+			<div id="portfolio__title">
+				<h2>Mes Projets</h2>
+				<div id="editorButton">
+					<i class="fa-regular fa-pen-to-square"></i>
+					<a href="#" class="modalBtn">Modifier</a>		
+				</div>
 			</div>
+			<div id="filter"></div>
+			<div class="gallery"></div>
 		</section>
 		<section id="contact">
 			<h2>Contact</h2>
@@ -61,6 +72,15 @@
 				<input type="submit" value="Envoyer">
 			</form>
 		</section>
+		<aside id="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal">
+			<div class="modal-wrapper">
+				<i id="closeModal" class="fa-solid fa-xmark"></i>
+				<h3>Galerie photo</h3>
+				<div class="modalGallery"></div>
+				<hr class="solid">
+				<button id="modal-btn">Ajouter une photo</button>
+			</div>
+		</aside>
 	</main>
 
 	<footer>

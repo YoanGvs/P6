@@ -56,8 +56,7 @@ table {
 /** end reset css**/
 
 body {
-	max-width: 1140px;
-	margin:auto;
+
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background: #FFFEF8;
@@ -66,11 +65,12 @@ header {
 	display: flex;
 	justify-content: space-between;
 	padding: 50px 0;
-	
+	max-width: 1024px;
+    margin: auto;
 }
 
 section {
-	margin: 50px 0
+	margin: 4rem 0
 }
 
 h1{
@@ -88,7 +88,9 @@ h1 > span {
 	letter-spacing: 0.1em;
 ;
 }
-
+a{
+	text-decoration: none;
+}
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -134,7 +136,6 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 .gallery {
 	width: 100%;
@@ -209,7 +210,7 @@ footer nav ul {
     color: #1D6154;
     text-align: center;
     font-family: Syne;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 700;
     line-height: normal;
     margin: 1rem;
@@ -265,4 +266,148 @@ footer nav ul {
 	line-height: normal;
 	text-decoration-line: underline;
 	padding-bottom: 75%
+}
+
+#editorBanner{
+	display: flex;
+    justify-content: center;
+    background: black;
+    gap: 1rem;
+    color: white;
+    padding: 1rem;
+	display: none;
+	text-align: center;
+	text-decoration: none;
+}
+
+#editorBanner a{
+	color: #FFF;
+}
+ 
+#portfolio__title{
+	display: flex;
+    justify-content: center;
+	margin-bottom: 3rem;
+} 
+
+#editorButton{
+	padding: 0.6rem 0 0 2rem;
+    display: none;
+}
+
+
+
+main{
+	max-width: 1024px;
+    margin: auto;
+}
+
+header img {
+	width: 1.375rem;
+	height: 1.375rem;
+}
+
+#filter{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+	flex-wrap: wrap;
+}
+
+#button__filter{
+	display: none;
+}
+
+figcaption{
+	padding: 0.5rem 0 0 0;
+}
+
+#closeModal{
+	display: flex;
+	justify-content: flex-end;
+	font-size: 1.5rem;
+}
+
+/*******modal*********/
+.modal-wrapper h3{
+	font-size: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-wrapper button{
+	height: 37px;
+    border-radius: 60px;
+    border: 1px solid #1D6154;
+    background: #1D6154;
+    color: white;
+    text-align: center;
+    font-family: Syne;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: normal;
+	transition: all 0.3s ease;
+	margin: 2rem 25%;
+    padding: 0 4rem;
+}
+
+.modal-wrapper button:hover{
+	background-color: white;
+    color: #1D6154; 
+}	
+.modalGallery{
+	padding: 2rem 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.modal-img{
+	max-width: 10rem;
+	max-height: 6.25rem;
+}
+
+.solid {
+	border-top: 3px solid #bbb;
+	margin: 1rem 3rem;
+}
+
+.modal-container{
+	position: relative;
+    display: inline-block;
+	margin: 0.5rem;
+}
+
+#modal{
+	position: fixed;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	display: none
+}
+
+.modal-wrapper{
+	overflow: auto;
+    width: 600px;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+    padding: 20px;
+    background-color: #FFF;
+    height: 600px;
+}
+
+.trash-button{
+	position: absolute;
+    top: 3px;
+    right: 3px;
+    z-index: 10;
+    color: white;
+    background-color: black;
+    padding: 0.3rem;
+	border-radius: 3px
 }

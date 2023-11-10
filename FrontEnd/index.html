@@ -74,12 +74,49 @@
 		</section>
 		<aside id="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal">
 			<div class="modal-wrapper">
-				<i id="closeModal" class="fa-solid fa-xmark"></i>
-				<h3>Galerie photo</h3>
-				<div class="modalGallery"></div>
-				<hr class="solid">
-				<button id="modal-btn">Ajouter une photo</button>
+				<div class="modal-main">
+					<i id="closeModal" class="fa-solid fa-xmark"></i>
+					<h3>Galerie photo</h3>
+					<div class="modalGallery">
+						<!-- Création des éléments pour chaque objets présent dans la gallery de l'API -->
+					</div>
+					<hr class="solid">
+					<button id="add-work">Ajouter une photo</button>
+				</div>
+				<form enctype="multipart/form-data" method="post" name="fileinfo" class="modal-content-add" id="form-upload">
+					<div class="modal-icon">
+						<i class="fa-solid fa-arrow-left return-arrow"></i>
+						<i class="fa-solid fa-x modal-close"></i>
+					</div>
+					<h3 class="modal-title">Ajout photo</h3>
+					<div class="modal-new-item-container">
+						<div class="modal-photo-container">
+							<img class="file-img" src="#" alt="Image Preview">
+							<i class="fa-regular fa-image"></i>
+							<label for="file" class="add-image-btn btn-bg-gray">
+								<input type="file" name="file" id="file" class="hide-file-btn" accept=".jpg, .png">
+								+ Ajouter photo
+							</label>
+							<span class="img-restriction">jpg, png : 4mo max</span>
+						</div>
+						<div class="add-title-wrapper">
+							<label class="title-input">Titre</label>
+							<input type="text" name="work-name" id="work-name" autocomplete="off">
+						</div>
+						<div class="add-categories-wrapper">
+							<label class="title-input">Catégorie</label>
+							<select name="select" id="select-cat">
+								<!--Affichage des catégory ici-->
+							</select>
+						</div>
+					</div>
+					<div class="modal-button-container">
+						<hr>
+						<button type="submit" id="validate-work" class="modal-btn">Valider</button>
+					</div>
+				</form>
 			</div>
+			
 		</aside>
 	</main>
 

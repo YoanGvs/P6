@@ -334,6 +334,7 @@ figcaption{
 	font-size: 2rem;
     display: flex;
     justify-content: center;
+	padding: 0 0 2rem;
 }
 
 .modal-wrapper button{
@@ -348,7 +349,7 @@ figcaption{
     font-weight: 700;
     line-height: normal;
 	transition: all 0.3s ease;
-	margin: 2rem 25%;
+	margin: 2rem 33% 0;
     padding: 0 4rem;
 }
 
@@ -410,4 +411,108 @@ figcaption{
     background-color: black;
     padding: 0.3rem;
 	border-radius: 3px
+}
+
+#form-upload{
+	display: none;
+	flex-direction: column;
+}
+.modal-icon{
+	display: flex;
+    justify-content: space-between;
+}
+
+.return-arrow{
+	width: 21px;
+	height: 21px;
+	flex-shrink: 0;
+}
+.modal-photo-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	box-sizing: border-box;
+	border-radius: 3px;
+	background: #E8F1F6;
+	width: 420px;
+	height: 169px;
+	padding-top: 13px;
+	padding-bottom: 19px;
+	gap: 7px;
+}
+.img-restriction {
+	display: flex;
+	justify-content: center;
+	font-size: 10px;
+	color: #444444;
+}
+.fa-image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #B9C5CC;
+	font-size: 76px;
+	font-size: 66px;
+	width: 76px;
+	height: 76px;
+	align-self: center;
+}
+.modal-title{
+	display: flex;
+	justify-content: center;
+}
+.add-image-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+	color: #306685;
+	background: #CBD6DC;
+	border-radius: 60px;
+	font-size: 16px;
+	font-family: 'Syne';
+	padding: 9px;
+	width: 184px;
+	height: 36px;
+	box-sizing: border-box;
+}
+.modal-new-item-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	margin: 0 5rem 3rem;
+}
+.add-title-wrapper,
+.add-categories-wrapper{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 10px;
+}
+.title-input{
+	font-size: 14px;
+	font-weight: 500;
+	color: #3D3D3D;
+	margin: 0.5rem;
+}
+.modal-new-item-container #work-name,
+.modal-new-item-container #select-cat {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	background: white;
+}
+.hide-file-btn {
+	display: none;
+}
+.modal-photo-container > img {
+	display: none;
+	position: absolute;
+	height: 169px;
+	width: 129px;
+	top: 0;
+	left: 143px;
 }

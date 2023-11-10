@@ -1,7 +1,7 @@
 // Import des modules nécessaires
 import { fetchWorks, deleteWork } from './api'
-import { loginA, allButton, galleryDiv, filterDiv, btnOpenModal, btnCloseModal, btnCleanModal, modal } from './domLinker'
-import { openModal, closeModal, cleanModal } from './modal'
+import { loginA, allButton, galleryDiv, filterDiv, btnOpenModal, btnCloseModal, btnAddWork, modal, modalReturnBtn } from './domLinker'
+import { openModal, closeModal, addNewWorkBtn, modalBackBtn } from './modal'
 
 // Cette fonction crée un bouton "Tout" qui permet d'afficher toutes les images.
 function createAllButton (parentDiv, galleryDiv) {
@@ -151,6 +151,7 @@ modal.addEventListener('click', function (event) {
 // Gestionnaires d'événements pour les boutons d'ouverture et de fermeture de la fenêtre modale
 btnOpenModal.addEventListener('click', () => openModal())
 btnCloseModal.addEventListener('click', () => closeModal())
-btnCleanModal.addEventListener('click', () => cleanModal())
+btnAddWork.addEventListener('click', () => addNewWorkBtn())
+modalReturnBtn.addEventListener('click', () => modalBackBtn())
 
 export default Index

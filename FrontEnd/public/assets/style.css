@@ -509,7 +509,7 @@ figcaption{
 	display: none;
 }
 .modal-photo-container > img {
-	display: none;
+	display: none; 
 	position: absolute;
 	height: 169px;
 	width: 129px;

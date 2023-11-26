@@ -1,3 +1,5 @@
+import { elements } from './domLinker.js'
+
 // Bouton pour réinitialiser le filtre
 const BUTTON_RESET_FILTER = 0
 // Récupération des données de la galerie et des catégories depuis le localStorage
@@ -28,27 +30,23 @@ async function init () {
 // Fonction pour afficher l'interface d'administration si l'utilisateur est connecté
 function displayAdminUI () {
   const userInfo = JSON.parse(window.sessionStorage.getItem('login'))
-  const loginText = document.getElementById('login-btn')
   // Affichage des éléments de l'interface en fonction de l'état de connexion
   if (userInfo !== null) {
-    loginText.innerText = 'logout'
-    const editionDisplayElements = document.querySelectorAll('.display-login')
-    for (const element of editionDisplayElements) {
+    elements.loginText.innerText = 'logout'
+    for (const element of elements.editionDisplayElements) {
       element.style.display = 'flex'
     }
     // Masquage de la barre de filtre en mode édition
-    const editionFilterBar = document.querySelector('.filter')
-    editionFilterBar.style.display = 'none'
+    elements.editionFilterBar.style.display = 'none'
   }
 }
 
 // Fonction pour générer la galerie d'images
 function generateGallery (gallery) {
-  const galleryDisplay = document.querySelector('.gallery')
   // Tri des œuvres par identifiant
   gallery.sort((a, b) => a.id - b.id)
   // Effacement du contenu actuel de la galerie
-  galleryDisplay.innerHTML = ''
+  elements.galleryDisplay.innerHTML = ''
   // Création des éléments pour chaque œuvre
   gallery.forEach(work => {
     const figure = document.createElement('figure')
@@ -61,22 +59,21 @@ function generateGallery (gallery) {
     figure.appendChild(imageElement)
     figure.appendChild(figCaption)
 
-    galleryDisplay.appendChild(figure)
+    elements.galleryDisplay.appendChild(figure)
   })
 };
 
 // Fonction pour créer les boutons de filtre
 function createFilterButtons (categories) {
-  const filterContainer = document.querySelector('.filter')
   // Effacement des boutons de filtre existants
-  filterContainer.innerHTML = ''
+  elements.filterContainer.innerHTML = ''
 
   // Création du bouton pour afficher toutes les catégories
   const button = document.createElement('button')
   button.classList.add('filter-btn')
   button.textContent = 'Tous'
   button.setAttribute('data-category', BUTTON_RESET_FILTER)
-  filterContainer.appendChild(button)
+  elements.filterContainer.appendChild(button)
   // Tri des catégories par identifiant
   categories.sort((a, b) => a.id - b.id)
 
@@ -86,7 +83,7 @@ function createFilterButtons (categories) {
     button.classList.add('filter-btn')
     button.textContent = category.name
     button.setAttribute('data-category', category.id)
-    filterContainer.appendChild(button)
+    elements.filterContainer.appendChild(button)
   })
 
   // Ajout d'un gestionnaire d'événements pour le filtrage
@@ -101,8 +98,7 @@ function createFilterButtons (categories) {
 };
 
 // Gestionnaire d'événements pour le bouton de connexion/déconnexion
-const boutonLogin = document.getElementById('login-btn')
-boutonLogin.addEventListener('click', () => {
+elements.boutonLogin.addEventListener('click', () => {
   const userInfo = JSON.parse(window.sessionStorage.getItem('login'))
   // Gestion de la connexion ou déconnexion
   if (userInfo) {
@@ -115,16 +111,11 @@ boutonLogin.addEventListener('click', () => {
 
 /** ************MODAL**********************/
 // Sélection du bouton pour modifier et initialisation des éléments de la modalité
-const boutonModify = document.querySelector('.modify-btn')
-const modal = document.getElementById('modal')
-const modalMain = document.querySelector('.modal-content-main')
-const modalAdd = document.querySelector('.modal-content-add')
 
 // Fonction pour créer la galerie dans la modalité
 function createModalGallery (gallery) {
-  const modalGallery = document.querySelector('.modal-gallery')
   // Effacement du contenu actuel de la galerie modal
-  modalGallery.innerHTML = ''
+  elements.modalGallery.innerHTML = ''
   // Tri des œuvres par identifiant
   gallery.sort((a, b) => a.id - b.id)
   // Création des éléments pour chaque œuvre
@@ -141,7 +132,7 @@ function createModalGallery (gallery) {
     imageContainer.appendChild(imageElement)
     imageContainer.appendChild(deleteElement)
 
-    modalGallery.appendChild(imageContainer)
+    elements.modalGallery.appendChild(imageContainer)
     // Gestionnaire d'événements pour la suppression
     deleteElement.addEventListener('click', (event) => {
       event.preventDefault()
@@ -176,56 +167,47 @@ function createModalGallery (gallery) {
 };
 
 // Gestionnaire d'événements pour l'ouverture de la modalité
-boutonModify.addEventListener('click', () => {
-  modal.style.display = 'flex'
-  modalMain.style.display = 'flex'
-  modalAdd.style.display = 'none'
-  returnArrow.style.visibility = 'hidden'
+elements.boutonModify.addEventListener('click', () => {
+  elements.modal.style.display = 'flex'
+  elements.modalMain.style.display = 'flex'
+  elements.modalAdd.style.display = 'none'
+  elements.returnArrow.style.visibility = 'hidden'
   createModalGallery(globalGallery)
 })
 
 // Gestionnaire d'événements pour la fermeture de la modalité
-modal.addEventListener('click', (event) => {
-  if (event.target === modal || event.target.classList.contains('modal-close')) {
-    modal.style.display = 'none'
+elements.modal.addEventListener('click', (event) => {
+  if (event.target === elements.modal || event.target.classList.contains('modal-close')) {
+    elements.modal.style.display = 'none'
   }
 })
 
 /** ******Ajout des photos************/
 
 // Sélection des éléments du DOM nécessaires pour l'ajout de nouvelles œuvres
-const addNewWorkBtn = document.getElementById('add-work')
-const returnArrow = document.querySelector('.return-arrow')
-const formUpload = document.getElementById('form-upload')
-const validateBtn = document.getElementById('validate-work')
-const addImgBtn = document.querySelector('.add-image-btn')
-const fileImg = document.querySelector('.file-img')
-const fileInput = document.getElementById('file')
-const workName = document.getElementById('work-name')
-const categoryName = document.getElementById('select-cat')
 const fileReader = new FileReader()
 
 // Gestionnaire d'événements pour retourner à la vue principale de la modalité
-returnArrow.addEventListener('click', () => {
-  returnArrow.style.visibility = 'hidden'
-  modalMain.style.display = 'flex'
-  modalAdd.style.display = 'none'
+elements.returnArrow.addEventListener('click', () => {
+  elements.returnArrow.style.visibility = 'hidden'
+  elements.modalMain.style.display = 'flex'
+  elements.modalAdd.style.display = 'none'
 })
 
 // Gestionnaire d'événements pour l'ouverture de la vue d'ajout de nouvelles œuvres
-addNewWorkBtn.addEventListener('click', () => {
-  returnArrow.style.visibility = 'visible'
-  modalMain.style.display = 'none'
-  modalAdd.style.display = 'flex'
-  addImgBtn.style.display = 'flex'
-  fileImg.style.display = 'none'
+elements.addNewWorkBtn.addEventListener('click', () => {
+  elements.returnArrow.style.visibility = 'visible'
+  elements.modalMain.style.display = 'none'
+  elements.modalAdd.style.display = 'flex'
+  elements.addImgBtn.style.display = 'flex'
+  elements.fileImg.style.display = 'none'
 
   // Réinitialisation des valeurs du formulaire
-  workName.value = ''
-  fileInput.value = ''
-  validateBtn.classList.remove('btn-bg-green')
-  validateBtn.classList.add('btn-bg-gray')
-  validateBtn.disabled = true
+  elements.workName.value = ''
+  elements.fileInput.value = ''
+  elements.validateBtn.classList.remove('btn-bg-green')
+  elements.validateBtn.classList.add('btn-bg-gray')
+  elements.validateBtn.disabled = true
   createSelectCategory()
 })
 
@@ -235,47 +217,47 @@ let workValue = null
 let categoryID = null
 
 // Gestionnaire d'événements pour gérer les changements sur le formulaire d'upload
-formUpload.addEventListener('change', () => {
+elements.formUpload.addEventListener('change', () => {
   // Assignation des valeurs saisies
-  workValue = workName.value
-  categoryID = categoryName.value
+  workValue = elements.workName.value
+  categoryID = elements.categoryName.value
   const maxFileSize = 4 * 1024 * 1024 // 4 MO (taille maximale du fichier)
 
   // Gestion de la sélection de l'image
-  if (fileInput.files.length > 0) {
-    selectedFile = fileInput.files[0]
+  if (elements.fileInput.files.length > 0) {
+    selectedFile = elements.fileInput.files[0]
 
     // Vérification de la taille du fichier
     if (selectedFile.size < maxFileSize) {
       // Affichage de l'image sélectionnée
-      addImgBtn.style.display = 'none'
-      fileImg.style.display = 'block'
+      elements.addImgBtn.style.display = 'none'
+      elements.fileImg.style.display = 'block'
 
       fileReader.onload = function (event) {
-        fileImg.src = event.target.result
+        elements.fileImg.src = event.target.result
       }
       fileReader.readAsDataURL(selectedFile)
     } else {
       alert('Fichier trop lourd, taille maximum 4 mo.')
     }
   } else {
-    addImgBtn.style.display = 'flex'
-    fileImg.style.display = 'none'
+    elements.addImgBtn.style.display = 'flex'
+    elements.fileImg.style.display = 'none'
   }
 
   // Activation du bouton de validation si toutes les conditions sont remplies
-  let readyToSubmit = workValue !== '' && categoryID !== 0 && fileInput.files.length > 0
+  let readyToSubmit = workValue !== '' && categoryID !== 0 && elements.fileInput.files.length > 0
   if (readyToSubmit) {
-    validateBtn.classList.remove('btn-bg-gray')
-    validateBtn.classList.add('btn-bg-green')
-    validateBtn.disabled = false
+    elements.validateBtn.classList.remove('btn-bg-gray')
+    elements.validateBtn.classList.add('btn-bg-green')
+    elements.validateBtn.disabled = false
 
-    formUpload.removeEventListener('submit', submitHandler)
-    formUpload.addEventListener('submit', submitHandler)
+    elements.formUpload.removeEventListener('submit', submitHandler)
+    elements.formUpload.addEventListener('submit', submitHandler)
   } else {
-    validateBtn.classList.remove('btn-bg-green')
-    validateBtn.classList.add('btn-bg-gray')
-    validateBtn.disabled = true
+    elements.validateBtn.classList.remove('btn-bg-green')
+    elements.validateBtn.classList.add('btn-bg-gray')
+    elements.validateBtn.disabled = true
     readyToSubmit = false
   }
 })
@@ -317,7 +299,7 @@ function submitWorkToAPI (title, imageUrl, categoryId) {
         window.localStorage.setItem('gallery', JSON.stringify(globalGallery))
         globalGallery = JSON.parse(window.localStorage.getItem('gallery'))
 
-        modal.style.display = 'none'
+        elements.modal.style.display = 'none'
         generateGallery(globalGallery)
       }
     })
@@ -350,7 +332,6 @@ function createSelectCategory () {
 }
 
 // Gestionnaire d'événements pour le formulaire de contact (si nécessaire)
-const formContact = document.getElementById('form-contact')
-formContact.addEventListener('submit', event => {
+elements.formContact.addEventListener('submit', event => {
   event.preventDefault()
 })

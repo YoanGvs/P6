@@ -36,6 +36,7 @@ function displayAdminUI () {
     for (const element of elements.editionDisplayElements) {
       element.style.display = 'flex'
     }
+
     // Masquage de la barre de filtre en mode édition
     elements.editionFilterBar.style.display = 'none'
   }

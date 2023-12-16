@@ -206,11 +206,17 @@ footer nav ul {
 	padding: 9px;
 }
 
-.filter-btn:hover {
+.filter-btn:hover{
 	cursor: pointer;
 	color: white;
 	background: #1D6154;
 }
+
+.filter-btn-active {
+	color: white;
+	background: #1D6154;
+  }
+  
 
 /*-------Edition Bar-----------*/
 .edition {

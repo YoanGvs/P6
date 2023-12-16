@@ -88,9 +88,25 @@ function createFilterButtons (categories) {
   })
 
   // Ajout d'un gestionnaire d'événements pour le filtrage
+
+  // const filterButtons = document.querySelectorAll('[data-category]')
+  // filterButtons.forEach(button => {
+  //   button.addEventListener('click', () => {
+  //     const categoryID = parseInt(button.getAttribute('data-category'))
+  //     const filter = categoryID === BUTTON_RESET_FILTER ? globalGallery : globalGallery.filter(work => work.categoryId === categoryID)
+  //     generateGallery(filter)
+  //   })
+  // })
+  // Ajout d'un gestionnaire d'événements pour le filtrage
   const filterButtons = document.querySelectorAll('[data-category]')
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
+    // Supprimer la classe 'active' de tous les boutons
+      filterButtons.forEach(btn => btn.classList.remove('filter-btn-active'))
+
+      // Ajouter la classe 'active' au bouton cliqué
+      button.classList.add('filter-btn-active')
+
       const categoryID = parseInt(button.getAttribute('data-category'))
       const filter = categoryID === BUTTON_RESET_FILTER ? globalGallery : globalGallery.filter(work => work.categoryId === categoryID)
       generateGallery(filter)
@@ -336,3 +352,4 @@ function createSelectCategory () {
 elements.formContact.addEventListener('submit', event => {
   event.preventDefault()
 })
+localStorage.removeItem('token')

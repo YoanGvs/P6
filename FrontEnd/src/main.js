@@ -234,18 +234,22 @@ let workValue = null
 let categoryID = null
 
 // Gestionnaire d'événements pour gérer les changements sur le formulaire d'upload
+// Gestionnaire d'événements pour gérer les changements sur le formulaire d'upload
 elements.formUpload.addEventListener('change', () => {
   // Assignation des valeurs saisies
-  workValue = elements.workName.value
+  workValue = elements.workName.value.trim()
   categoryID = elements.categoryName.value
   const maxFileSize = 4 * 1024 * 1024 // 4 MO (taille maximale du fichier)
 
   // Gestion de la sélection de l'image
+  let imageSelected = false
   if (elements.fileInput.files.length > 0) {
     selectedFile = elements.fileInput.files[0]
 
     // Vérification de la taille du fichier
-    if (selectedFile.size < maxFileSize) {
+    if (selectedFile.size <= maxFileSize) {
+      imageSelected = true
+
       // Affichage de l'image sélectionnée
       elements.addImgBtn.style.display = 'none'
       elements.fileImg.style.display = 'block'
@@ -256,6 +260,7 @@ elements.formUpload.addEventListener('change', () => {
       fileReader.readAsDataURL(selectedFile)
     } else {
       alert('Fichier trop lourd, taille maximum 4 mo.')
+      elements.fileInput.value = '' // Réinitialiser le choix du fichier
     }
   } else {
     elements.addImgBtn.style.display = 'flex'
@@ -263,7 +268,7 @@ elements.formUpload.addEventListener('change', () => {
   }
 
   // Activation du bouton de validation si toutes les conditions sont remplies
-  let readyToSubmit = workValue !== '' && categoryID !== 0 && elements.fileInput.files.length > 0
+  let readyToSubmit = workValue !== '' && categoryID !== '0' && imageSelected
   if (readyToSubmit) {
     elements.validateBtn.classList.remove('btn-bg-gray')
     elements.validateBtn.classList.add('btn-bg-green')

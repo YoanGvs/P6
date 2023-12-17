@@ -72,6 +72,7 @@ function createFilterButtons (categories) {
   // Création du bouton pour afficher toutes les catégories
   const button = document.createElement('button')
   button.classList.add('filter-btn')
+  button.classList.add('filter-btn-active')
   button.textContent = 'Tous'
   button.setAttribute('data-category', BUTTON_RESET_FILTER)
   elements.filterContainer.appendChild(button)
@@ -87,16 +88,6 @@ function createFilterButtons (categories) {
     elements.filterContainer.appendChild(button)
   })
 
-  // Ajout d'un gestionnaire d'événements pour le filtrage
-
-  // const filterButtons = document.querySelectorAll('[data-category]')
-  // filterButtons.forEach(button => {
-  //   button.addEventListener('click', () => {
-  //     const categoryID = parseInt(button.getAttribute('data-category'))
-  //     const filter = categoryID === BUTTON_RESET_FILTER ? globalGallery : globalGallery.filter(work => work.categoryId === categoryID)
-  //     generateGallery(filter)
-  //   })
-  // })
   // Ajout d'un gestionnaire d'événements pour le filtrage
   const filterButtons = document.querySelectorAll('[data-category]')
   filterButtons.forEach(button => {
